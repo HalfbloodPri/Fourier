@@ -28,11 +28,11 @@ def weightInt():
     global realW
     maxValue = realW.max()
     minValue = realW.min()
-    realW = np.round((1*(realW-minValue)/maxValue))
+    realW = np.round((1*(realW-minValue)/(maxValue-minValue)))
     global imaginaryW
     maxValue = imaginaryW.max()
     minValue = imaginaryW.min()
-    imaginaryW = np.round((1*(imaginaryW-minValue)/maxValue))
+    imaginaryW = np.round((1*(imaginaryW-minValue)/(maxValue-minValue)))
 
 ##先对输入进行归一化
 inputNormalization()
