@@ -26,26 +26,40 @@ def inputInt():
 #对权值进行定点化
 def weightInt():
     global realW
+    '''
     maxValue = realW.max()
     minValue = realW.min()
     realW = np.round((1*(realW-minValue)/(maxValue-minValue)))
+    '''
+    realW = np.where(realW<=0,0,1)
+    #np.save('./para/realWInt.npy',realW)
     global imaginaryW
+    '''
     maxValue = imaginaryW.max()
     minValue = imaginaryW.min()
     imaginaryW = np.round((1*(imaginaryW-minValue)/(maxValue-minValue)))
+    '''
+    imaginaryW = np.where(imaginaryW<=0,0,1)
+    #np.save('./para/imaginaryWInt.npy',imaginaryW)
 
 ##先对输入进行归一化
 inputNormalization()
 inputInt()
 weightInt()
 amplitude = np.zeros((dataGroup,pianoKeyNum))
+realAmp = np.zeros((dataGroup,pianoKeyNum))
+imaginaryAmp = np.zeros((dataGroup,pianoKeyNum))
 for i in range(dataGroup):
     ##计算实部幅值和虚部幅值
     realAmplitude = np.dot(realW,inputDataNor[(i*dataNum):((i+1)*dataNum)])
+    realAmp[i] = realAmplitude
     imaginaryAmplitude = np.dot(imaginaryW,inputDataNor[(i*dataNum):((i+1)*dataNum)])
+    imaginaryAmp[i] = imaginaryAmplitude
     ##计算最终幅值
     amplitude[i] = realAmplitude*realAmplitude + imaginaryAmplitude*imaginaryAmplitude
     #print(i)
     #print(amplitude[i])
     #print(np.argmax(amplitude[i]))
 np.save('./result/ampD1W1.npy',amplitude)
+np.save('./result/realAmpD1w1.npy',realAmp)
+np.save('./result/imaginaryAmpD1W1.npy',imaginaryAmp)

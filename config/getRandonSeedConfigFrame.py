@@ -4,7 +4,7 @@ import time
 #生成64bit的配置帧
 frameAppended = '0000000000000000000'
 frameTitle = '000000'
-chipAndCoreAddr = ['00000000000000000000','00000000000000100000']
+chipAndCoreAddr = ['00000000000000000000']
 with open('./config/randomSeed64bit.txt','w') as randomSeedConfigFile:
     for addr in chipAndCoreAddr:
         coreYAddr = addr[15:20]
